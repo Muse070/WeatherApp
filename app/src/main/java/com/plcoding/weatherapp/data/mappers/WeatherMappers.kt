@@ -1,18 +1,25 @@
 package com.plcoding.weatherapp.data.mappers
 
 import com.plcoding.weatherapp.data.remote.WeatherDataDto
+<<<<<<< HEAD
 import com.plcoding.weatherapp.data.remote.WeatherDto
 import com.plcoding.weatherapp.domain.weather.WeatherData
 import com.plcoding.weatherapp.domain.weather.WeatherInfo
+=======
+import com.plcoding.weatherapp.domain.weather.WeatherData
+>>>>>>> master/master
 import com.plcoding.weatherapp.domain.weather.WeatherType
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
+<<<<<<< HEAD
 private data class IndexedWeatherData(
     val index: Int,
     val data: WeatherData
 )
 
+=======
+>>>>>>> master/master
 fun WeatherDataDto.toWeatherDataMap(): Map<Int, List<WeatherData>> {
     return time.mapIndexed { index, time ->
         val temperature = temperatures[index]
@@ -20,6 +27,7 @@ fun WeatherDataDto.toWeatherDataMap(): Map<Int, List<WeatherData>> {
         val windSpeed = windSpeeds[index]
         val pressure = pressures[index]
         val humidity = humidities[index]
+<<<<<<< HEAD
         IndexedWeatherData(index = index,
             data = WeatherData(
                 time = LocalDateTime.parse(time, DateTimeFormatter.ISO_DATE_TIME),
@@ -48,4 +56,17 @@ fun WeatherDto.toWeatherInfo(): WeatherInfo {
         weatherDataPerDay = weatherDataMap,
         currentWeatherData = currentWeatherData
     )
+=======
+        WeatherData(
+            time = LocalDateTime.parse(time, DateTimeFormatter.ISO_DATE_TIME),
+            temperatureCelsius = temperature,
+            pressure = pressure,
+            windSpeed = windSpeed,
+            humidity = humidity,
+            weatherType = WeatherType.fromWMO(weatherCode)
+        )
+    }.groupBy {
+        it.time.dayOfMonth
+    }
+>>>>>>> master/master
 }
